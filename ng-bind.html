@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app ng-init="val1=5; val2=10; pessoa={ nome : 'Ral Oliver'};">
+<head>
+  <meta charset="UTF-8">
+  <title>ng-bind and ng-init</title>
+  <script src="js/angular.min.js"></script>
+</head>
+<body>
+  <h1>Exemplo de ng-bind e ng-init</h1>
+  <p>Result: <strong ng-bind="val1+val2"></strong></p>
+  <!-- Em algumas situações, a chamada via {{}} pode ser exibida para o usuário -->
+  <h3>Val2 / Va1 = {{val2 / val1}}</h3>
+  <p>Cálculo Simples <strong>{{20 + 25}}</strong></p>
+  <h4>Bem vindo, {{ pessoa.nome }}</h4>
+  bind
+  <input type="text" ng-model="pessoa.nome">
+  <!-- Para número inteiros, utilize o type number -->
+  <input type="number" ng-model="val1">
+  <input type="number" ng-model="val2">
+</body>
+</html>

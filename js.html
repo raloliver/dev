@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JS</title>
+    <script>
+//        alert("Teste");
+        /* como realizar soma */
+        var total = 3 + 2;
+        /* como ativar o console */
+        console.log(total);
+        console.log("Teste Console");
+        /* criação de objeto no formato JSON */
+        var individuo = {
+            name    : "Israel",
+            age     : 29,
+            status  : false
+        }
+        console.log(individuo);   
+
+        /* pequeno exemplo de condição */
+        /* estrutura básica para o IF */
+        if (individuo.status == true) {
+            console.log("O user " +individuo.name+ " ativado!");
+        }else{
+            console.log("O user " +individuo.name+ " desativado!");
+        }
+        /* looping: para concatenar use o + */
+        /* estrutura básica para for */
+        for (var i = 1; i <= 20; i++) {
+            document.write("<p>" + i + "</p>");
+        }
+        
+        /* exemplo de getElementById inserindo o valor como default no input */
+        function loadWindow() {
+            document.getElementById("campo").value = total;
+        }
+
+        /* um conjunto de indivíduos */
+        var grupo = []; // sempre usar o [] para iniciar o array e {} para iniciar o objeto
+        /* 
+        comando pra adicionar todo o objeto (push) 
+        neste exemplo, grupo é um array de individuos
+        */
+        grupo.push(individuo);
+        console.log(grupo);
+    </script>
+</head>
+<body onload="loadWindow()">
+    <input id="campo" type="text" value="">
+</body>
+</html>

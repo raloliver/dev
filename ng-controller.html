@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="app">
+<head>
+  <meta charset="UTF-8">
+  <title>ng-controller: são as regras de negócios do app</title>
+</head>
+<body>
+  <!-- O AngularJS não tem um método principal, ele é composto por diversas pequenas apps -->
+  <!-- Nos controllers deixamos as funções do app -->
+  <!-- O ideal é ter um arquivo para cada controller -->
+  <div ng-controller="MainCtrl">
+  <!-- Dentro do controle posso declarar variáveis ou funções -->
+    <h1>{{ nome }}</h1>
+    <button type="button" ng-click="save('Nome')">Salvar</button>
+  </div>
+  <script src="js/angular.min.js"></script>
+  <script src="js/app.module.js"></script>
+  <!-- Depois dos módulo declarados, definimos os controllers -->
+  <script src="js/MainCtrl.js"></script>
+</body>
+</html>
