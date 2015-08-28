@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt" ng-app="app">
+<head>
+  <meta charset="UTF-8">
+  <title>Exemplos com Formulários trabalhando em memória (sem persitência de dados)</title>
+  <link rel="stylesheet" href="http://bootswatch.com/paper/bootstrap.min.css">
+</head>
+<style>
+    /*a class ng-touched é adicionado ao entrar no campo e sair sem preencher nenhuma informação pelo menos uma vez*/
+    input.ng-invalid.ng-touched {box-shadow: 0 -2px 0 #e51c23 inset;}
+    input.ng-valid.ng-touched {box-shadow: 0 -2px 0 #4caf50 inset}
+</style>
+<body ng-controller="form">
+<div class="container">
+<div class="row well-lg">
+<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+<!-- expressão novalidate para enviar o formulário sem validação de dados -->
+<!-- a diretiva ng-submit salva a pessoa, pois passamos no parâmetro o objeto a ser salvo, isso indica que posso ter a mesma função para vários objetos -->
+<form name="formy" novalidate ng-submit="savePerson(person)">
+<!-- para que a validação ocorra, devemos informar os nomes de cada item do formulário, inclusive o próprio formulário -->
+<legend>Formulário</legend>
+    <!-- required propriedade do html5 -->
+    <!-- o ng-model liga o campo ao meu módulo -->
+    <p><strong>Nome:</strong> <input type="text" ng-model="person.name" required name="txtName"></p>
+    <p><strong>Email:</strong> <input type="email" ng-model="person.email" required name="txtEmail"></p>
+    <p><strong>Sexo:</strong> <input type="radio" value="m" ng-model="person.sexo"> Masculino
+            <!-- ao definir a diretiva ng-model, o campo já vem com um valor padrão e não permite a escolha dos dois campos, apenas de um -->
+            <input type="radio" value="f" ng-model="person.sexo"> Feminino
+    </p>
+    <p>Estado:</strong>
+            <select ng-model="person.local" class="form-control">
+                <!-- a diretiva ng-selected determina o valor padrão para o option baseado no objeto -->
+                <option ng-repeat="state in local" value="{{state}}" ng-selected="state==person.local">{{state}}</option>
+            </select>
+    </p>
+    <p>
+    <!-- diretiva ng-disabled e propriedade: $invalid desabilitar o botão caso o form esteja incorreto -->
+            <input type="submit" class="btn btn-success" value="Salvar" ng-disabled="formy.$invalid">
+            <input type="button" class="btn btn-warning" value="Cancelar">
+    </p>
+
+</form>
+</div>
+<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+    <!-- aviso de validação de campo -->
+    <!-- neste caso utilizaremos três validações:
+        1: se o campo foi preenchido ($error.required)
+        2: se o campo já foi acessado
+        3: se o formulário foi enviado ($submitted) -->
+    <!-- usamos o parâmetro || para adicionar dizer "ou" e && para dizer "e" adicionar mais validações na mesma diretiva, no caso a ng-show -->
+    <div ng-show="formy.$submitted || formy.txtName.$touched">
+    <!-- se ocorrer um erro no campo txtName, por conta dele ser preenchido, exibimos o aviso -->
+        <div ng-show="formy.txtName.$error.required" class="alert alert-warning">
+            <strong class="lead">Atenção! Insira o seu Nome.</strong> <br>O Campo Nome deve ser preenchido.
+        </div>
+    </div>
+    <!-- mesma validação para email -->
+    <div ng-show="formy.$submitted || formy.txtEmail.$touched">
+        <div ng-show="formy.txtEmail.$error.required" class="alert alert-danger">
+            <strong class="lead">Atenção! Insira o seu Email.</strong> <br>O Campo Email deve ser preenchido.
+        </div>
+        <!-- validação de email inválido -->
+        <div ng-show="formy.txtEmail.$error.email" class="alert alert-danger">
+            <strong class="lead">Atenção! Insira um Email válido.</strong> <br>Este email não é valido, por favor informe o seu email corretamente.
+        </div>
+    </div>
+</div>
+<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+    <h4>Debug</h4>
+<!-- informamos o objeto e filtramos (|) informando que o objeto em questão esta no formato JSON -->
+    <pre>
+        {{person | json}}
+    </pre>
+<!-- exemplo de coleta de informações apenas no debug -->
+    <pre>
+        {{people | json}}
+    </pre>
+</div>
+
+</div>
+</div>
+<!-- bibliotecas -->
+<script src="js/angular.min.js"></script>
+<!-- controllers -->
+<script src="js/app.form.js"></script>
+</body>
+</html>
